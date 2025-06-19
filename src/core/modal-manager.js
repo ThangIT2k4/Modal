@@ -1,5 +1,5 @@
 import { MODAL_CONFIG } from './config.js';
-import {  handleError, debounce, getPreviousFocusSelector, checkScrollContent } from '../utils/utils.js';
+import { handleError, debounce, getPreviousFocusSelector, checkScrollContent } from '../utils/utils.js';
 import { getDOMElements, removeModalFromDOM, createModal } from '../utils/dom-utils.js';
 import { renderModal } from '../components/modal-render.js';
 
@@ -50,7 +50,7 @@ export const ModalManager = (() => {
     }
 
     const setupGlobalEventListeners = () => {
-        window.addEventListener('click', handleEscapeKey, { passive: false });
+        window.addEventListener('keydown', handleEscapeKey, { passive: false });
         if (state.groupActions) {
             state.groupActions.addEventListener('click', handleBtnClick, { passive: true});
         }
@@ -77,15 +77,16 @@ export const ModalManager = (() => {
         console.log(e);
         if (e.key !== 'Escape') return;
 
-        const currentModalId = state.modalStack.pop();
+        const currentModalId = state.modalStack[state.modalStack.length - 1];
         if (currentModalId === undefined) return;
         
-        const modal = state.modals.find(m => m.id === currentModalId);
+        const modal = state.modals[currentModalId];
+        console.log(modal)
         if (!modal) {
             console.warn(`Modal has id: ${currentModalId} not found`);
             return;
         }
-        closeModal();
+        closeModalElement();
     }
 
     const handleBtnClick = (e) => {
@@ -191,9 +192,12 @@ export const ModalManager = (() => {
             modal.setAttribute('aria-labelledby', `modal-title-${modalIndex}`);
 
             const btnClose = modal.querySelector('.modal-close');
+            
             if (btnClose) {
-                btnClose.setAttribute('arria-label', 'Close modal');
+                btnClose.setAttribute('aria-label', 'Close modal');
                 btnClose.focus();
+
+                console.log(btnClose);
             }
 
             setupFocusTrap(modal);
