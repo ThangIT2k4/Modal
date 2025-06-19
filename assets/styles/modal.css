@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px; /* Độ rộng thanh scroll dọc */
+    height: 8px; /* Độ cao thanh scroll ngang */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Màu nền track */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Màu thanh scroll */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Màu khi hover */
+}
+
+main {
+    margin: 20px;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.btn {
+    margin: 20px;
+    padding: 6px 10px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity, visibility;
+    transition-duration: .3s;
+}
+
+.modal-backdrop.show + .modal-backdrop.show {
+    background: transparent;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-backdrop.show .modal-container {
+    transform: scale(1);
+}
+
+.modal-container {
+    position: relative;
+    width: min(600px, 90%);
+    padding: 28px;
+    padding-top: 50px;
+    border-radius: 10px;
+    background: #fff;
+    transform: scale(0);
+    transition: transform .3s;
+}
+
+.modal-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    color: #666;
+    border-radius: 50%;
+    background: #ebebeb;
+    font-size: 2rem;
+}
+
+.modal-close:focus {
+    border: 1px solid red;
+}
+
+.modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content.has-scroll {
+    padding-right: 15px;
+    margin-right: -10px;
+}
+
+
