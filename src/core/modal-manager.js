@@ -1,5 +1,5 @@
 import { MODAL_CONFIG } from './config.js';
-import { handleError, debounce, getPreviousFocusSelector, checkScrollContent } from '../utils/utils.js';
+import { handleError, debounce, getPreviousFocusSelector, checkScrollContent, $, $$ } from '../utils/utils.js';
 import { getDOMElements, removeModalFromDOM, createModal } from '../utils/dom-utils.js';
 import { renderModal } from '../components/modal-render.js';
 
@@ -195,9 +195,9 @@ export const ModalManager = (() => {
             
             if (btnClose) {
                 btnClose.setAttribute('aria-label', 'Close modal');
-                btnClose.focus();
-
-                console.log(btnClose);
+                setTimeout(() => {
+                    btnClose.focus();
+                }, 50)
             }
 
             setupFocusTrap(modal);
@@ -234,9 +234,11 @@ export const ModalManager = (() => {
     const restorePreviousFocus = (modal) => {
         try {
             const selector = modal.dataset.previousFocusSelector;
-            if (selector) return;
+            if (!selector) return;
             
             const previousEl = $(selector);
+
+            console.log(previousEl);
             if (previousEl && typeof previousEl.focus === 'function') {
                 setTimeout(() => {
                     try {
