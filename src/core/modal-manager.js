@@ -156,21 +156,21 @@ export const ModalManager = (() => {
                 if (e.key !== 'Tab') return;
 
                 if (focusableElements.length == 1) {
-                    e.prevenDefault();
+                    e.preventDefault();
                     firstEl.focus();
                     return;
                 }
 
                 if (e.shiftKey) {
                     if (document.activeElement === firstEl) {
-                        e.prevenDefault();
+                        e.preventDefault();
                         lastEl.focus();
                         return;
                     }
                 }
                 else {
                     if (document.activeElement === lastEl) {
-                        e.prevenDefault();
+                        e.preventDefault();
                         firstEl.focus();
                     }
                 }
